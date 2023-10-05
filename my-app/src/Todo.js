@@ -3,12 +3,16 @@ import React from 'react'
 class Todo extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {id: props.id, value: props.value, done: props.done}
+    this.state = {data: props.data}
   }
-  completeTask = () => {
-    console.log('todo complete', this.props.id);
-    // this.setState({ done : true})
-    this.props.completeTask(this.props.id)
+  // completeTask = () => {
+  //   console.log('todo complete', this.props.data.id);
+  //   // this.setState({ done : true})
+  //   this.props.completeTask(this.props.data.id)
+  // }
+  static getDerivedStateFromProps(props, state){
+    console.log('getDerivedStateFromProps', props);
+    return {data : props.data}
   }
   render(){
     let checkDone = '';
@@ -20,7 +24,7 @@ class Todo extends React.Component{
           width="25"
           style={{ cursor: "pointer" }}
           title="click by done"
-          onClick={() => this.props.completeTask(this.props.id)}
+          onClick={() => this.props.completeTask(this.props.data.id)}
         />
       );
     }
@@ -33,11 +37,11 @@ class Todo extends React.Component{
                 width= '15' style={{cursor: "pointer"}}
                 title='click by add'
                 // goij cha
-                onClick={()=>this.props.deleteTask(this.props.id)}
+                onClick={()=>this.props.deleteTask(this.props.data.id)}
               /> 
         &nbsp;&nbsp;
-        <span className={this.props.done ? 'done' : ''}>
-          {this.props.value}</span>
+        <span className={this.state.data.done ? 'done' : ''}>
+          {this.props.data.name}</span>
         <img
                 src ='./asset/iconfinder_Draw_2290864.png'
                 alt='Add task'

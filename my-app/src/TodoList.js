@@ -60,10 +60,7 @@ class TodoList extends React.Component{
             <ul className='taskItem'>
               {this.state.tasks.map((value,index) => {
                   // return <li key={index}>{value}</li>
-                  return <Todo id={value.id}
-                   key ={value.id} 
-                   value={value.name} 
-                   done={value.done}
+                  return <Todo data={value}
                    deleteTask={this.deleteTask}
                    completeTask = {this.completeTask}
                    />
