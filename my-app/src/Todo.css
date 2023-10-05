@@ -1,3 +1,7 @@
+.Todo{
+  text-align: left;
+  margin-left: 0px;
+}
 .aligned {
     display: flex;
     justify-content: center;
@@ -11,4 +15,10 @@
     justify-content: center;
     flex-flow: column;
   }
+
+  .done {
+    text-decoration: line-through;
+    /* other styles for completed tasks */
+  }
+  
   
