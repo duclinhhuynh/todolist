@@ -1,5 +1,5 @@
 .App {
-  text-align: left;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -30,6 +30,6 @@
   }
 }
 .aligned {
-  display: flex;
+  display: inline-block;
   align-items: center;
 }

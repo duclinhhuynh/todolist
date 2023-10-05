@@ -1,9 +1,10 @@
 import './App.css';
 import React from 'react'
+import Todo from './Todo';
 class App extends React.Component{
   constructor(props) {
     super(props);
-    this.state = { taskName: '', tasks:['task1', 'task2','task3']};
+    this.state = { taskName: '', tasks:[]};
   }
   myTaskChangeHandler = (event) => {
     this.setState({taskName: event.target.value});
@@ -13,13 +14,31 @@ class App extends React.Component{
   }
 
   addTask = () => {
-    console.log('add task', this.state.taskName);
     if(this.state.taskName === ''){
       return;
     }
-    this.state.tasks.push(this.state.taskName);
+    const id = this.state.tasks.length;
+    const name = this.state.taskName;
+    this.state.tasks.push({id, name, done:false});
     this.setState({ taskName:'' });
+    // this.show(this.state.taskName)
   }
+  completeTask = (id) => {
+    console.log('complete:', id);
+    const tasks =  this.state.state;
+    tasks.forEach(element => {
+      if(element.id === id){
+        element.done = true;
+      }
+    });
+    console.log('task muon complete', tasks);
+    this.setState({tasks})
+  }
+  deleteTask= (id) => {
+    const tasks = this.state.tasks.filter((task) => task.id !== id );
+    console.log('saukhixoa', tasks);
+    this.setState({ tasks});
+  };
   render(){
     return (
       <div className="App">
@@ -39,7 +58,13 @@ class App extends React.Component{
             </div>
             <ul className='taskItem'>
               {this.state.tasks.map((value,index) => {
-                  return <li key={index}>{value}</li>
+                  // return <li key={index}>{value}</li>
+                  return <Todo id={value.id}
+                   key ={index} 
+                   value={value.name} 
+                   deleteTask={this.deleteTask}
+                   completeTask = {this.completeTask}
+                   />
               })}
             </ul>
         </header>
